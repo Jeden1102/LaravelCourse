@@ -20,7 +20,7 @@
                 <td>{{ $user->name }}</td>
                 <td>{{ $user->surname }}</td>
                 <td>{{ $user->phone_number }}</td>
-                <td></td>
+                <td><button data-id="{{ $user->id }}" class="btn btn-danger btn-sm delete">X</button></td>
               </tr>
             @endforeach
         </tbody>
@@ -29,4 +29,23 @@
 
 </div>
 
+@endsection
+@section('javascript')
+
+    <script>
+    let btns = $('.delete');
+    console.log(btns);
+      $('.delete').click(function(){
+        $.ajax({
+          method:"DELETE",
+          url: "/users/" + $(this).data("id"),
+          // data: {
+          //   id : 
+          // },
+          success: function( result ) {
+           window.location.reload();
+          }
+        });
+      })
+    </script>
 @endsection
