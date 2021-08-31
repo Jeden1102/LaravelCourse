@@ -31,21 +31,12 @@
 
 @endsection
 @section('javascript')
+<script>
+  let deleteUrl = "{{ url('users') }}/";
 
-    <script>
-    let btns = $('.delete');
-    console.log(btns);
-      $('.delete').click(function(){
-        $.ajax({
-          method:"DELETE",
-          url: "/users/" + $(this).data("id"),
-          // data: {
-          //   id : 
-          // },
-          success: function( result ) {
-           window.location.reload();
-          }
-        });
-      })
-    </script>
+</script>
+@endsection
+@section('javascriptFiles')
+<script src="{{ asset('js/deleteUser.js') }}" ></script>
+
 @endsection
