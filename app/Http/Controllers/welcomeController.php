@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\ProductCategory;
 use Illuminate\Http\Request;
 
 class welcomeController extends Controller
@@ -16,6 +17,7 @@ class welcomeController extends Controller
     {
         return view("welcome",[
             'products'=>Product::paginate(10),
+            'categories'=>ProductCategory::orderBy("name",'asc')->get(),
         ]);
     }
 
