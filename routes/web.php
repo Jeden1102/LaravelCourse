@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\welcomeController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
@@ -16,9 +17,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Auth::routes();
 
@@ -42,3 +40,6 @@ Route::post("/products/{product}",[ProductController::class,'update'])->name('pr
 Route::delete("/products/{product}",[ProductController::class,'destroy'])->name('products.destroy')->middleware('auth');
 //pokaz pordukt
 Route::get("/products/{product}",[ProductController::class,'show'])->name('products.show')->middleware('auth');
+
+//strona główna
+Route::get("/",[welcomeController::class,'index']);

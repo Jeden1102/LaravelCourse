@@ -38,6 +38,9 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $product = new Product($request->all());
+        if($request->hasFile("image")){
+            $product->image_path=$request->file('image')->store('products');
+        }
         $product->save();
         return redirect(route('products.index'));
     }
@@ -77,6 +80,9 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
+        if($request->hasFile("image")){
+            $product->image_path=$request->file('image')->store('products');
+        }
         $product->fill($request->all());
         $product->save();
         return redirect(route('products.index'));
