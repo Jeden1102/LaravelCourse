@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\ProductCategory;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -26,7 +27,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view("products.create");
+        return view("products.create",[
+            'categories'=>ProductCategory::all()
+        ]);
     }
 
     /**
@@ -37,6 +40,14 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        $validated = $request->validate([
+            'name' => 'required|min:2',
+            'description' => 'required|min:2',
+            'amount' => 'required|integer',
+            'price' => 'required|numeric|between:0,9999999999999999999',
+            'category_id' => 'nullable',
+            'image'=>'nullable'
+        ]);
         $product = new Product($request->all());
         if($request->hasFile("image")){
             $product->image_path=$request->file('image')->store('products');
@@ -54,6 +65,7 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         return view("products.show",[
+
             'product'=>$product
         ]);
     }
@@ -67,6 +79,8 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         return view("products.edit",[
+            'categories'=>ProductCategory::all(),
+
             'product'=>$product
         ]);
     }

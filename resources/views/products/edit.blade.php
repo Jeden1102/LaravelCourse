@@ -66,6 +66,20 @@
                                 @enderror
                             </div>
                         </div>
+
+                        <div class="form-group row">
+                            <label for="price" class="col-md-4 col-form-label text-md-right">Kategoria</label>
+
+                            <select name="category_id" id="">
+                                @foreach ($categories as $category)
+                                <option id=" {{ $category->id }}" value="{{ $category->id }}"  type="number"  class="form-control" @if(!is_null($product->category) && $product->category->id == $category->id) @endif>
+                                    {{ $category->name }}</option>   
+                                @endforeach
+
+                            </select>
+                        </div>
+
+
                         {{-- image --}}
                         <div class="form-group row">
                             <label for="image" class="col-md-4 col-form-label text-md-right">Dodaj zdjęcie</label>
@@ -79,7 +93,6 @@
 
                             <div class="col-md-6">
                                 <img src="{{ asset('storage/' . $product->image_path)}}">
-
                             </div>
                         </div>
      

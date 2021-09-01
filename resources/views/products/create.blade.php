@@ -68,14 +68,32 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label for="category_id" class="col-md-4 col-form-label text-md-right">Kategoria</label>
+
+                            <div class="col-md-6">
+                                <select name="category_id" id="">
+                                    @foreach ($categories as $category)
+                                    <option id=" {{ $category->id }}" value="{{ $category->id }}"  type="number"  class="form-control"  value="{{ old('category_id') }}" required autocomplete="surname">
+                                        {{ $category->name }}</option>   
+                                    @endforeach
+
+                                </select>
+
+                            </div>
+                        </div>
 
                         {{-- images --}}
                         <div class="form-group row">
                             <label for="image" class="col-md-4 col-form-label text-md-right">Dodaj zdjęcie</label>
 
                             <div class="col-md-6">
-                                <input id="image"   type="file" class="form-control"  name="image">
-
+                                <input id="image"   type="file" class="form-control  @error('image') is-invalid @enderror"  name="image">
+                                @error('image')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 

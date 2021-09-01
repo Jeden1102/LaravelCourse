@@ -13,6 +13,11 @@ class Product extends Model
         'description',
         'amount',
         'price',
-        'image_path'
+        'image_path',
+        'category_id'
     ];
+    public function category()
+    {
+        return $this->belongsTo(ProductCategory::class);
+    }
 }
